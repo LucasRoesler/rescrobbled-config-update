@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "rescrobbler-update"
+version = "0.1.0"
+description = ""
+authors = ["Lucas Roesler <roesler.lucas@gmail.com>"]
+readme = "README.md"
+packages = [{include = "rescrobbler_update"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+toml = "^0.10.2"
+
+[tool.poetry.scripts]
+rescrobbler-update = 'rescrobbler_update:main'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
