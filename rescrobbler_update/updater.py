@@ -1,10 +1,13 @@
 import os
-from pathlib import Path
-import toml
 import subprocess
+from pathlib import Path
+
+import toml
+
 
 def update_config(config_path: Path):
-    data = toml.load(config_path.read_text())
+    config_path = config_path.expanduser()
+    data = toml.load(config_path)
 
     # Execute the playerctl --list-all command
     result = subprocess.run(["playerctl", "--list-all"], stdout=subprocess.PIPE)
@@ -13,7 +16,9 @@ def update_config(config_path: Path):
     output = result.stdout.decode("utf-8").splitlines()
 
     # Find the firefox.instance value
-    firefox_instance = next((line for line in output if "firefox.instance" in line), None)
+    firefox_instance = next(
+        (line for line in output if "firefox.instance" in line), None
+    )
     if not firefox_instance:
         print("Firefox instance is not running")
         exit(0)
@@ -28,7 +33,8 @@ def update_config(config_path: Path):
     # Write the data back to the TOML file
     config_path.write_text(toml.dumps(data))
 
-if __name__ == "__main__":
+
+def main():
     config_path = Path(
         os.environ.get("RESCROBBLED_CONFIG_PATH", "~/.config/rescrobbled/config.toml")
     )

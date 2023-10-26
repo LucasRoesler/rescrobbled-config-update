@@ -11,8 +11,34 @@ python = "^3.12"
 toml = "^0.10.2"
 
 [tool.poetry.scripts]
-rescrobbler-update = 'rescrobbler_update:main'
+rescrobbler-update = 'rescrobbler_update:updater.main'
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.1.2"
+pyright = "^1.1.333"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+
+[tool.pyright]
+# see https://microsoft.github.io/pyright/#/configuration?id=pyright-configuration
+include = ["gdp_replatform"]
+exclude = [
+    "**/node_modules",
+    "**/__pycache__",
+]
+reportMissingImports = true
+typeCheckingMode = "basic"
+
+
+[tool.ruff]
+# See https://beta.ruff.rs/docs/configuration/
+select = ["E", "F", "I",]
+ignore = ["E501"]
+extend-safe-fixes = ["F601"]
+
+[tool.ruff.isort]
+combine-as-imports = true
