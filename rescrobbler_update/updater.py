@@ -1,5 +1,6 @@
 import os
 import subprocess
+import time
 from pathlib import Path
 
 import toml
@@ -39,3 +40,10 @@ def main():
         os.environ.get("RESCROBBLED_CONFIG_PATH", "~/.config/rescrobbled/config.toml")
     )
     update_config(config_path)
+    time.sleep(1)
+    # restart the rescrobbled service
+    print("Restarting the rescrobbled service")
+    subprocess.run(["systemctl", "--user", "restart", "rescrobbled.service"])
+
+    time.sleep(1)
+    subprocess.run(["systemctl", "--user", "status", "rescrobbled.service"])
