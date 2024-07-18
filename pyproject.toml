@@ -15,7 +15,7 @@ rescrobbler-update = 'rescrobbler_update:updater.main'
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.1.2"
-pyright = "^1.1.333"
+pyright = "^1.1.372"
 
 [build-system]
 requires = ["poetry-core"]
